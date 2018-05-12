@@ -1,0 +1,9 @@
+rootProject.name = 'leyeah'
+include ':react-native-fetch-blob'
+project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
+include ':react-native-image-crop-picker', ':androidcrash'
+project(':react-native-image-crop-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-crop-picker/android')
+include ':rn-splash-screen'
+project(':rn-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/rn-splash-screen/android')
+
+include ':app'

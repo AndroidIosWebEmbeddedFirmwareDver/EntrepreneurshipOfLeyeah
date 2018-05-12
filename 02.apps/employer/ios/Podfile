@@ -1,0 +1,32 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'leyeah' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for leyeah
+    # https://github.com/ivpusic/react-native-image-crop-picker
+    pod 'RSKImageCropper'
+    pod 'QBImagePickerController'
+
+  target 'leyeahTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+platform :ios, '8.0'
+
+target 'leyeah-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for leyeah-tvOS
+
+  target 'leyeah-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

@@ -1,0 +1,122 @@
+import React, {Component} from 'react';
+import {
+    Text,
+    ScrollView,
+    Image,
+    Button,
+    View,
+    Platform,
+    PixelRatio,
+    Alert,
+    TextInput,
+    Dimensions,
+    ActivityIndicator,
+    TouchableOpacity,
+} from 'react-native';
+
+
+import Calendar from 'react-native-calendar-select';
+import HeaderCommonView from '../../views/header/header.common.view'
+import styles from '../plugin.common.style'
+
+import InfiniteCalendar from '../../views/calendar/index'
+
+
+export default class DateChoiceCommonScreen extends Component {
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <HeaderCommonView navigator={this.props.navigator}
+                                  headerLeftShow={true}
+                                  headerCenterShow={true}
+                                  headerRightShow={false}
+                                  headerCenterTitle={'选择日期'}/>
+                <View>
+                    <InfiniteCalendar />
+                </View>
+            </View>
+        );
+    }
+}
+
+export class DateChoiceCommonScreen1 extends Component {
+    constructor(props) {
+        super(props);
+        this.confirmDate = this.confirmDate.bind(this);
+        this.openCalendar = this.openCalendar.bind(this);
+    }
+
+    componentDidMount() {
+    }
+
+    // when confirm button is clicked, an object is conveyed to outer component
+    // contains following property:
+    // startDate [Date Object], endDate [Date Object]
+    // startMoment [Moment Object], endMoment [Moment Object]
+    confirmDate({startDate, endDate, startMoment, endMoment}) {
+        // this.setState({
+        //     startDate,
+        //     endDate
+        // });
+        if (this.props.callbackSetDate) {
+            this.props.callbackSetDate(startDate, endDate);
+        }
+    }
+
+    openCalendar() {
+        this.calendar && this.calendar.open();
+    }
+
+    // in render function
+    render() {
+        // It's an optional property, I use this to show the structure of customI18n object.
+        let customI18n = {
+            'w': ['', '一', '二', '三', '四', '五', '六', '日'],
+            'weekday': ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+            'text': {
+                'start': '开 始',
+                'end': '结 束',
+                'date': '日 期',
+                'save': '确 定',
+                'clear': '清除'
+            },
+            'date': 'M月D日' // date format
+        };
+        // optional property, too.
+        let color = {
+            //mainColor = '#15aaaa',
+            // subColor = '#fff',
+            // borderColor = 'rgba(255, 255, 255, 0.50)'
+            // mainColor:'#FFCC33',
+            // subColor: '#FFFFFF',
+            // borderColor:'#F0F0F0'
+            subColor: '#F0F0F0',
+            //'#FFCC33'
+        };
+        return (
+            <View style={styles.container}>
+                <HeaderCommonView navigator={this.props.navigator}
+                                  headerLeftShow={true}
+                                  headerCenterShow={true}
+                                  headerRightShow={false}
+                                  headerCenterTitle={'招工人'}/>
+                <View>
+                    <Button
+                        ref={(callcalendar) => this.callcalendar = callcalendar}
+                        title="Open Calendar" onPress={this.openCalendar}/>
+                    <Calendar
+                        i18n="zh"
+                        ref={(calendar) => this.calendar = calendar}
+                        customI18n={customI18n}
+                        color={color}
+                        format="YYYYMMDD"
+                        minDate="20171012"
+                        maxDate="20171230"
+                        onConfirm={this.confirmDate}
+                    />
+                </View>
+            </View>
+        );
+    }
+}
